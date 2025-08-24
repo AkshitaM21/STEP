@@ -1,25 +1,25 @@
 import java.util.Scanner;
 
-public class CharFrequencyUnique {
-    public static char[] uniqueChars(String s) {
-        String result = "";
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (result.indexOf(c) == -1) {
-                result += c;
+public class CharFrequencyNested {
+    public static void frequency(String s) {
+        char[] arr = s.toCharArray();
+        int[] freq = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            freq[i] = 1;
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    freq[i]++;
+                    arr[j] = '0';
+                }
             }
         }
-        return result.toCharArray();
-    }
 
-    public static void frequency(String s) {
-        char[] unique = uniqueChars(s);
-        for (char c : unique) {
-            int count = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == c) count++;
+        System.out.println("Character Frequencies:");
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != '0' && arr[i] != ' ') {
+                System.out.println(arr[i] + " : " + freq[i]);
             }
-            System.out.println(c + " : " + count);
         }
     }
 
@@ -31,4 +31,3 @@ public class CharFrequencyUnique {
         sc.close();
     }
 }
-
